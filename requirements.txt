@@ -1,2 +1,2 @@
 streamlit
-PyPDF2
+pymupdf
