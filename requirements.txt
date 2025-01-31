@@ -1,2 +1,6 @@
 streamlit
+scikit-learn
+pandas
+matplotlib
+numpy
 pymupdf
