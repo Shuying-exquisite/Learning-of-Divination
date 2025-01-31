@@ -53,62 +53,7 @@ if selected_section:
 
                     # 允许用户输入页码
                     page_num = st.number_input("输入页码查看（1 到 52）", min_value=1, max_value=52, step=1)
-                    
-            elif title == "三命通会":
-                  # 假设 PDF 文件在同一个文件夹中
-                  pdf_file_path = "三命通会 ([明]万明英 撰  陈明  王胜恩 注释).pdf"  # 请确保文件名与实际文件匹配
-
-                  if os.path.exists(pdf_file_path):
-                      # 使用 Streamlit 缓存文件路径等简单数据
-                      @st.cache_data
-                      def get_pdf_metadata(pdf_path):
-                          # 使用 PyMuPDF 打开 PDF 文件并获取元数据
-                          doc = fitz.open(pdf_path)
-                          return doc.page_count  # 仅返回页数等简单数据
-
-                      # 获取 PDF 元数据（例如页数）
-                      total_pages = get_pdf_metadata(pdf_file_path)
-
-                      # 允许用户输入页码
-                      page_num = st.number_input("输入页码查看（1 到 488）", min_value=1, max_value=488, step=1)
-
-
-            elif title == "四库存目 子平汇刊 5 穷通宝鉴评注":
-                  # 假设 PDF 文件在同一个文件夹中
-                  pdf_file_path = "四库存目 子平汇刊 5 穷通宝鉴评注（清）徐乐吾注) .pdf"  # 请确保文件名与实际文件匹配
-
-                  if os.path.exists(pdf_file_path):
-                      # 使用 Streamlit 缓存文件路径等简单数据
-                      @st.cache_data
-                      def get_pdf_metadata(pdf_path):
-                          # 使用 PyMuPDF 打开 PDF 文件并获取元数据
-                          doc = fitz.open(pdf_path)
-                          return doc.page_count  # 仅返回页数等简单数据
-
-                      # 获取 PDF 元数据（例如页数）
-                      total_pages = get_pdf_metadata(pdf_file_path)
-
-                      # 允许用户输入页码
-                      page_num = st.number_input("输入页码查看（1 到 52）", min_value=1, max_value=52, step=1)
-                    
-                      # 渲染指定页面
-                      def render_page(pdf_path, page_num):
-                          doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
-                          page = doc.load_page(page_num - 1)  # 页码从 1 开始，但 PyMuPDF 使用 0-based index
-                          # 提高渲染质量，增加渲染分辨率
-                          zoom_x = 4.0  # 水平缩放
-                          zoom_y = 4.0  # 垂直缩放
-                          matrix = fitz.Matrix(zoom_x, zoom_y)
-                          pix = page.get_pixmap(matrix=matrix)  # 使用更高分辨率渲染页面
-                          img_data = pix.tobytes("png")
-                          return img_data
-
-                      # 使用容器显示图像
-                      with st.container():  # 添加容器来放置图像
-                          # 渲染当前页
-                          current_page_data = render_page(pdf_file_path, page_num)
-                          st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
-
-                  else:
-                      st.error("找不到 PDF 文件，请确保文件存在并且路径正确。")
+ 
+                else:
+                    st.error("找不到 PDF 文件，请确保文件存在并且路径正确。")
 
