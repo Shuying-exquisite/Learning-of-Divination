@@ -52,7 +52,7 @@ if selected_section:
                     total_pages = get_pdf_metadata(pdf_file_path)
 
                     # 允许用户输入页码
-                    page_num = st.number_input("输入页码查看（1 到 10）", min_value=1, max_value=10, step=1)
+                    page_num = st.number_input("输入页码查看（1 到 52）", min_value=1, max_value=52, step=1)
 
                     # 渲染指定页面
                     def render_page(pdf_path, page_num):
