@@ -2,8 +2,11 @@ import streamlit as st
 from PyPDF2 import PdfReader
 import os
 
-# 设置文件路径
-pdf_folder = './pdfs'  # 假设PDF文件在该文件夹中
+# 获取当前工作目录（应用程序所在的目录）
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 假设 PDF 文件与应用程序代码在同一文件夹下
+pdf_folder = current_dir
 
 # 列出文件夹中的所有PDF文件
 pdf_files = [f for f in os.listdir(pdf_folder) if f.endswith('.pdf')]
