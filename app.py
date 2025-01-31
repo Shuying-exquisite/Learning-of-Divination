@@ -38,7 +38,7 @@ if selected_section:
             # 如果选择了 "滴天髓"，则提供 PDF 查看功能
             if title == "滴天髓":
                 # 假设 PDF 文件在同一个文件夹中
-                pdf_file_path = "library/滴天髓原文（刘基注）.pdf"  # 请确保文件名与实际文件匹配
+                pdf_file_path = "library\滴天髓原文（刘基注）.pdf"  # 请确保文件名与实际文件匹配
 
                 if os.path.exists(pdf_file_path):
                     # 使用 Streamlit 缓存文件路径等简单数据
