@@ -56,7 +56,7 @@ if selected_section:
                     
             if title == "三命通会":
                 # 假设 PDF 文件在同一个文件夹中
-                pdf_file_path = "三命通会 ([明]万明英 撰  陈明  王胜恩 注释).pdf"  # 请确保文件名与实际文件匹配
+                pdf_file_path = "library/三命通会 ([明]万明英 撰  陈明  王胜恩 注释).pdf"  # 请确保文件名与实际文件匹配
 
                 if os.path.exists(pdf_file_path):
                     # 使用 Streamlit 缓存文件路径等简单数据
