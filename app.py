@@ -37,7 +37,7 @@ if selected_section:
             st.write(content)
 
             # 如果选择了 "机器学习西瓜书"，则提供 PDF 查看功能
-            if title == "机器学习西瓜书简介":
+            if title == "滴天髓":
                 # 假设 PDF 文件在同一个文件夹中
                 pdf_file_path = "滴天髓原文（刘基注）.pdf"  # 请确保文件名与实际文件匹配
 
