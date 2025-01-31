@@ -72,7 +72,7 @@ if selected_section:
                     # 允许用户输入页码
                     page_num = st.number_input("输入页码查看（1 到 488）", min_value=1, max_value=488, step=1)
 
-            # 如果选择了 "滴天髓"，则提供 PDF 查看功能
+
             if title == "四库存目 子平汇刊 5 穷通宝鉴评注":
                 # 假设 PDF 文件在同一个文件夹中
                 pdf_file_path = "四库存目 子平汇刊 5 穷通宝鉴评注（清）徐乐吾注) .pdf"  # 请确保文件名与实际文件匹配
