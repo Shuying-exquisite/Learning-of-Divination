@@ -109,6 +109,6 @@ if selected_section:
                           current_page_data = render_page(pdf_file_path, page_num)
                           st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
 
-                else:
-                    st.error("找不到 PDF 文件，请确保文件存在并且路径正确。")
+                  else:
+                      st.error("找不到 PDF 文件，请确保文件存在并且路径正确。")
 
