@@ -41,24 +41,22 @@ if selected_section:
                 pdf_file_path = "滴天髓原文（刘基注）.pdf"  # 请确保文件名与实际文件匹配
 
                 if os.path.exists(pdf_file_path):
-                    # 使用 Streamlit 缓存 PDF 文件加载
+                    # 使用 Streamlit 缓存文件路径等简单数据
                     @st.cache_data
-                    def load_pdf(pdf_path):
-                        # 使用 PyMuPDF 打开 PDF 文件
+                    def get_pdf_metadata(pdf_path):
+                        # 使用 PyMuPDF 打开 PDF 文件并获取元数据
                         doc = fitz.open(pdf_path)
-                        return doc
+                        return doc.page_count  # 仅返回页数等简单数据
 
-                    # 加载 PDF 文件
-                    doc = load_pdf(pdf_file_path)
-
-                    # 获取总页数
-                    total_pages = doc.page_count
+                    # 获取 PDF 元数据（例如页数）
+                    total_pages = get_pdf_metadata(pdf_file_path)
 
                     # 允许用户输入页码
                     page_num = st.number_input("输入页码查看（1 到 10）", min_value=1, max_value=10, step=1)
 
                     # 渲染指定页面
-                    def render_page(page_num):
+                    def render_page(pdf_path, page_num):
+                        doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
                         page = doc.load_page(page_num - 1)  # 页码从 1 开始，但 PyMuPDF 使用 0-based index
                         # 提高渲染质量，增加渲染分辨率
                         zoom_x = 4.0  # 水平缩放
@@ -71,8 +69,9 @@ if selected_section:
                     # 使用容器显示图像
                     with st.container():  # 添加容器来放置图像
                         # 渲染当前页
-                        current_page_data = render_page(page_num)
+                        current_page_data = render_page(pdf_file_path, page_num)
                         st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
 
                 else:
                     st.error("找不到 PDF 文件，请确保文件存在并且路径正确。")
+
