@@ -6,11 +6,11 @@ from io import BytesIO
 # 创建目录
 menu = {
     "简介": [
-        ("我做这个程序的目的", "收集术数学习资料，方便自己随时随地的查看和下载 "),
+        ("我做这个程序的目的", "收集术数学习资料，方便自己随时随地的查看和下载；从目录开始每一个小标题是每一本经典古集。 "),
         ("我的 GitHub", "[点击这里访问我的 GitHub](https://github.com/Shuying-exquisite)"),
     ],
     "目录": [
-        ("滴天髓",""),
+        ("滴天髓", ""),
         ("st.write()：文本输出", "st.write() 是一个万能的输出函数，可以输出文本、表格、图形等。"),
         ("st.button()：按钮", "st.button('按钮') 创建一个按钮组件，用户点击后触发事件。"),
     ]
@@ -24,7 +24,7 @@ with st.sidebar:
     selected_section = st.selectbox("选择章节:", list(menu.keys()))
     
     # 展开章节的小标题
-    selected_topic = st.radio("选择小标题:", [item[0] for item in menu[selected_section]])
+    selected_topic = st.selectbox("选择小标题:", [item[0] for item in menu[selected_section]])
 
 # 根据选择的小标题在主界面展示内容
 if selected_section:
@@ -35,14 +35,14 @@ if selected_section:
             st.subheader(title)
             st.write(content)
 
-            # 如果选择了 "机器学习西瓜书"，则提供 PDF 查看功能
+            # 如果选择了 "滴天髓"，则提供 PDF 查看功能
             if title == "滴天髓":
                 # 假设 PDF 文件在同一个文件夹中
                 pdf_file_path = "滴天髓原文（刘基注）.pdf"  # 请确保文件名与实际文件匹配
 
                 if os.path.exists(pdf_file_path):
                     # 使用 Streamlit 缓存 PDF 文件加载
-                    @st.cache_resource
+                    @st.cache_data
                     def load_pdf(pdf_path):
                         # 使用 PyMuPDF 打开 PDF 文件
                         doc = fitz.open(pdf_path)
