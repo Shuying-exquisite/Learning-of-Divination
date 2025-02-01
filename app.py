@@ -2,12 +2,39 @@ import streamlit as st
 import os
 import fitz  # PyMuPDF
 from io import BytesIO
+
 def get_book_titles(folder_path):
     file_names = os.listdir(folder_path)
     book_titles = tuple(file_name.split(".")[0] for file_name in file_names if file_name.endswith(".pdf"))
     return book_titles
 folder_path = "./"
 book_titles = get_book_titles(folder_path)
+
+def display_pdf_page(title):
+    # 动态生成 PDF 文件路径，假设每本书的 PDF 文件名是书名 + ".pdf"
+    pdf_file_path = f"{title}.pdf"
+
+    if os.path.exists(pdf_file_path):
+        # 使用 Streamlit 缓存文件路径等简单数据
+        @st.cache_data
+        def get_pdf_metadata(pdf_path):
+            # 使用 PyMuPDF 打开 PDF 文件并获取元数据
+            doc = fitz.open(pdf_path)
+            return doc.page_count  # 返回总页数
+
+        # 获取 PDF 元数据（例如页数）
+        total_pages = get_pdf_metadata(pdf_file_path)
+
+        # 允许用户输入页码
+        page_num = st.number_input(f"输入页码查看（1 到 {total_pages}）", min_value=1, max_value=total_pages, step=1)
+
+        # 使用容器显示图像
+        with st.container():  # 添加容器来放置图像
+            # 渲染当前页
+            current_page_data = render_page(pdf_file_path, page_num)
+            st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
+    else:
+        st.error(f"无法找到对应的 PDF 文件：{pdf_file_path}")
 
 def render_page(pdf_path, page_num):
     doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
@@ -50,32 +77,4 @@ if selected_section:
             st.subheader(title)
             st.write(content)
 
-            # 如果选择了 "滴天髓"，则提供 PDF 查看功能
-            if title == "滴天髓":
-                # 假设 PDF 文件在同一个文件夹中
-                pdf_file_path = "滴天髓原文（刘基注）.pdf"  # 请确保文件名与实际文件匹配
-
-                if os.path.exists(pdf_file_path):
-                    # 使用 Streamlit 缓存文件路径等简单数据
-                    @st.cache_data
-                    def get_pdf_metadata(pdf_path):
-                        # 使用 PyMuPDF 打开 PDF 文件并获取元数据
-                        doc = fitz.open(pdf_path)
-                        return doc.page_count  # 仅返回页数等简单数据
-
-                    # 获取 PDF 元数据（例如页数）
-                    total_pages = get_pdf_metadata(pdf_file_path)
-
-                    # 允许用户输入页码
-                    page_num = st.number_input("输入页码查看（1 到 52）", min_value=1, max_value=52, step=1)
-
-
-                    # 使用容器显示图像
-                    with st.container():  # 添加容器来放置图像
-                        # 渲染当前页
-                        current_page_data = render_page(pdf_file_path, page_num)
-                        st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
-
-                else:
-                    st.error("找不到 PDF 文件，请确保文件存在并且路径正确。")
-
+def display_pdf_page(title)
