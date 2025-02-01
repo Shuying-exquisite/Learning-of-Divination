@@ -77,4 +77,4 @@ if selected_section:
             st.subheader(title)
             st.write(content)
 
-def display_pdf_page(title)
+display_pdf_page(title)
