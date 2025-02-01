@@ -8,12 +8,12 @@ def get_book_titles(folder_path):
     file_names = os.listdir(folder_path)
     book_titles = tuple(file_name.split(".")[0] for file_name in file_names if file_name.endswith(".pdf"))
     return book_titles
-folder_path = "./"
+folder_path = "./library/"
 book_titles = get_book_titles(folder_path)
 
 def display_pdf_page(title):
     # 动态生成 PDF 文件路径，假设每本书的 PDF 文件名是书名 + ".pdf"
-    pdf_file_path = f"{title}.pdf"
+    pdf_file_path = f"./library/{title}.pdf"
 
     if os.path.exists(pdf_file_path):
         # 使用 Streamlit 缓存文件路径等简单数据
