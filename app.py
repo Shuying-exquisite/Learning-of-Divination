@@ -13,18 +13,24 @@ def render_page(pdf_path, page_num):
     img_data = pix.tobytes("png")
     return img_data
 
-# 创建目录
 menu = {
     "简介": [
         ("我做这个程序的目的", "收集术数学习资料，方便自己随时随地的查看和下载；从目录开始每一个小标题是每一本经典古集。 "),
         ("我的 GitHub", "[点击这里访问我的 GitHub](https://github.com/Shuying-exquisite)"),
     ],
-    "目录": [
-        ("滴天髓", ""),
-        ("st.write()：文本输出", "st.write() 是一个万能的输出函数，可以输出文本、表格、图形等。"),
-        ("st.button()：按钮", "st.button('按钮') 创建一个按钮组件，用户点击后触发事件。"),
-    ]
+    "目录": []
 }
+
+# 假设我们有这个书名的元组
+book_titles = (
+    "滴天髓", 
+    "st.write()：文本输出", 
+    "st.button()：按钮"
+)
+
+# 将元组中的书名填入 "目录" 部分的小标题
+for title in book_titles:
+    menu["目录"].append((title, ""))
 
 # 侧边栏目录
 with st.sidebar:
