@@ -51,6 +51,7 @@ def display_pdf_page(title):
                 data=pdf_data,
                 file_name=pdf_file_path,
                 mime="application/pdf"
+            )
 
 menu = {
     "简介": [
