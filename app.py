@@ -49,7 +49,7 @@ def display_pdf_page(title):
             st.download_button(
                 label="下载 PDF",
                 data=pdf_data,
-                file_name=pdf_file_path,
+                file_name=f"{title}.pdf",
                 mime="application/pdf"
             )
 
