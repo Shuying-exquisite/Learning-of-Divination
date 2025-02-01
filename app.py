@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import fitz  # PyMuPDF
 from io import BytesIO
+st.set_option('client.showErrorDetails', False)
 
 def get_book_titles(folder_path):
     file_names = os.listdir(folder_path)
