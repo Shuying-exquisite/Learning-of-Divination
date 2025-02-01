@@ -2,6 +2,12 @@ import streamlit as st
 import os
 import fitz  # PyMuPDF
 from io import BytesIO
+def get_book_titles(folder_path):
+    file_names = os.listdir(folder_path)
+    book_titles = tuple(file_name.split(".")[0] for file_name in file_names if file_name.endswith(".pdf"))
+    return book_titles
+folder_path = "./"
+book_titles = get_book_titles(folder_path)
 
 def render_page(pdf_path, page_num):
     doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
@@ -20,13 +26,6 @@ menu = {
     ],
     "目录": []
 }
-
-# 假设我们有这个书名的元组
-book_titles = (
-    "滴天髓", 
-    "st.write()：文本输出", 
-    "st.button()：按钮"
-)
 
 # 将元组中的书名填入 "目录" 部分的小标题
 for title in book_titles:
