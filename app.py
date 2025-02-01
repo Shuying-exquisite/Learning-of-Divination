@@ -28,22 +28,22 @@ def display_pdf_page(title):
 
         # 允许用户输入页码
         page_num = st.number_input(f"输入页码查看（1 到 {total_pages}）", min_value=1, max_value=total_pages, step=1)
-
+        def render_page(pdf_path, page_num):
+            doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
+            page = doc.load_page(page_num - 1)  # 页码从 1 开始，但 PyMuPDF 使用 0-based index
+            zoom_x = 4.0  # 水平缩放
+            zoom_y = 4.0  # 垂直缩放
+            matrix = fitz.Matrix(zoom_x, zoom_y)
+            pix = page.get_pixmap(matrix=matrix)  # 使用更高分辨率渲染页面
+            img_data = pix.tobytes("png")
+            return img_data
         # 使用容器显示图像
         with st.container():  # 添加容器来放置图像
             # 渲染当前页
             current_page_data = render_page(pdf_file_path, page_num)
             st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
 
-def render_page(pdf_path, page_num):
-    doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
-    page = doc.load_page(page_num - 1)  # 页码从 1 开始，但 PyMuPDF 使用 0-based index
-    zoom_x = 4.0  # 水平缩放
-    zoom_y = 4.0  # 垂直缩放
-    matrix = fitz.Matrix(zoom_x, zoom_y)
-    pix = page.get_pixmap(matrix=matrix)  # 使用更高分辨率渲染页面
-    img_data = pix.tobytes("png")
-    return img_data
+
 
 menu = {
     "简介": [
