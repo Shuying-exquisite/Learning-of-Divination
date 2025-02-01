@@ -76,4 +76,5 @@ if selected_section:
             st.subheader(title)
             st.write(content)
 
-display_pdf_page(title)
+if selected_section == "目录" and selected_topic:
+    display_pdf_page(selected_topic)
