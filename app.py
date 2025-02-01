@@ -33,8 +33,6 @@ def display_pdf_page(title):
             # 渲染当前页
             current_page_data = render_page(pdf_file_path, page_num)
             st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
-    else:
-        st.error(f"无法找到对应的 PDF 文件：{pdf_file_path}")
 
 def render_page(pdf_path, page_num):
     doc = fitz.open(pdf_path)  # 每次需要打开 PDF 文件
