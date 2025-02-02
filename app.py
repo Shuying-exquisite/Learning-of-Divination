@@ -43,11 +43,11 @@ def display_pdf_page(title):
             current_page_data = render_page(pdf_file_path, page_num)
             st.image(current_page_data, use_column_width=True)  # 图像自适应容器宽度
 
-        # 添加下载 PDF 按钮
+        # 添加下载 按钮
         with open(pdf_file_path, "rb") as pdf_file:
             pdf_data = pdf_file.read()
             st.download_button(
-                label="下载 PDF",
+                label="下载此书",
                 data=pdf_data,
                 file_name=f"{title}.pdf",
                 mime="application/pdf"
